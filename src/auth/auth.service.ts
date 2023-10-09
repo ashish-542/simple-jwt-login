@@ -16,7 +16,6 @@ export class AuthService {
     async login(user){
         const payload={userId:user._id,username:user.username};
         const tokens=await this.getTokens(payload);
-        console.log("🚀 ~ file: auth.service.ts:19 ~ AuthService ~ login ~ payload:", payload)
         await this.userModel.findOneAndUpdate({username:payload.username},{refreshToken:tokens.refreshToken});
         return {
             token:tokens.accessToken,
